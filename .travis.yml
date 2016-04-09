@@ -1,0 +1,39 @@
+language: cpp
+
+compiler: gcc
+
+sudo: false
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++
+      - libboost-dev
+      - libgtest-dev
+
+install:
+    - mkdir gtest
+    - cd gtest
+    - echo $(pwd)
+    - export LIBRARY_PATH=$(pwd)
+    - cp -r /usr/src/gtest/* ./
+    - cmake -D CMAKE_INSTALL_PREFIX:PATH=./ ./
+    - make
+    - ls -al
+    - cd -
+
+before_script:
+    - uname -a
+    - printenv
+    - dpkg -l libgtest-dev
+    - grep "#define BOOST_VERSION " /usr/include/boost/version.hpp
+
+script:
+    - date
+    - ls -al
+    - make test
+
+after_failure:
+    - cat RunChess.out
