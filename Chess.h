@@ -37,7 +37,7 @@ private:
 public:
 	King(int x, int y, int owner) : GamePiece(x, y, owner);
 
-	bool validMove(int x, int y);
+	bool validMove(int x, int y, GamePiece * object);
 };
 
 //-------
@@ -49,7 +49,7 @@ private:
 public:
 	Queen(int x, int y, int owner) : GamePiece(x, y, owner);
 
-	bool validMove(int x, int y);
+	bool validMove(int x, int y, GamePiece * object);
 };
 
 //------
@@ -61,7 +61,7 @@ private:
 public:
 	Rook(int x, int y, int owner) : GamePiece(x, y, owner);
 
-	bool validMove(int x, int y);
+	bool validMove(int x, int y, GamePiece * object);
 };
 
 //--------
@@ -73,7 +73,7 @@ private:
 public:
 	Bishop(int x, int y, int owner) : GamePiece(x, y, owner);
 
-	bool validMove(int x, int y);
+	bool validMove(int x, int y, GamePiece * object);
 };
 
 //--------
@@ -85,7 +85,7 @@ private:
 public:
 	Knight(int x, int y, int owner) : GamePiece(x, y, owner);
 
-	bool validMove(int x, int y);
+	bool validMove(int x, int y, GamePiece * object);
 };
 
 //------
@@ -94,10 +94,11 @@ public:
 class Pawn : public GamePiece{
 private:
 	string const _name = "pawn";
+	bool _has_moved;
 public:
-	Pawn(int x, int y, int owner) : GamePiece(x, y, owner);
+	Pawn(int x, int y, int owner) : GamePiece(x, y, owner), _has_moved(false);
 
-	bool validMove(int x, int y);
+	bool validMove(int x, int y, GamePiece * object);
 };
 
 //------------
